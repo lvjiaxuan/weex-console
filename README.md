@@ -11,7 +11,7 @@ npm i weex-console
 # 使用
 
 ```js
-import weexConsole from 'weexConsole'
+import weexConsole from 'weex-console'
 
 // 插件方式安装
 Vue.use(weexConsole)

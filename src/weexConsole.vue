@@ -70,7 +70,7 @@ export default {
       left: 0,
       maxTop: 0,
       maxLeft: 0,
-      showPanel: true,
+      showPanel: false,
       tabType,
     }
   },

@@ -1,14 +1,26 @@
 {
   "name": "weex-console",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "weex console",
   "main": "dist/index.cjs.js",
   "scripts": {
     "build": "npx webpack --config webpack.config.js --progress"
   },
-  "keywords": [],
+  "keywords": [
+    "weex",
+    "console",
+    "log",
+    "debug"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lvjiaxuan/weex-console.git"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "browserslist": "last 2 versions, > 1%, not dead",
-  "author": "",
+  "author": "lvjiaxuan",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.14.2",
