@@ -1,6 +1,6 @@
 {
   "name": "weex-console",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "weex console",
   "main": "dist/index.cjs.js",
   "scripts": {

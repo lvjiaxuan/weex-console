@@ -1,5 +1,5 @@
 <template>
-  <div class="wc-wrapper" @click="closePanel">
+  <div class="wc-wrapper">
     <div
       class="wc-btn"
       ref="weex-console"
@@ -13,7 +13,10 @@
 
     <div v-if="showPanel" class="wc-panel">
       <div class="wc-panel-tabs">
-        <div :class="['wc-panel-tab-item', tabName === 'log' && 'wc-panel-tab-item-active']" @click="tabName = 'log'">
+        <div
+          :class="['wc-panel-tab-item', tabName === 'log' && 'wc-panel-tab-item-active']"
+          @click="tabName = 'log'"
+        >
           <text>log</text>
         </div>
         <div
@@ -40,7 +43,11 @@
       </scroller>
 
       <div class="wc-footer">
-        <div v-if="['log', 'storage'].includes(tabName)" class="wc-footer-item" @click="handleClear">
+        <div
+          v-if="['log', 'storage'].includes(tabName)"
+          class="wc-footer-item"
+          @click="handleClear"
+        >
           <text>Clear-{{ tabName }}</text>
         </div>
         <div class="wc-footer-item" @click="showPanel = false"><text>Hide</text></div>
@@ -240,7 +247,9 @@ export default {
             removeItemPromies.push(
               new Promise((resolveB, rejectB) =>
                 storage.removeItem(key, event => {
-                  event.result !== 'success' ? rejectB(`storage.removeItem('${key}') error`) : resolveB()
+                  event.result !== 'success'
+                    ? rejectB(`storage.removeItem('${key}') error`)
+                    : resolveB()
                 })
               )
             )
@@ -259,10 +268,12 @@ export default {
 <style>
 .wc-wrapper {
   position: fixed;
+  width: 0;
+  height: 0;
   top: 0;
-  bottom: 0;
   left: 0;
-  right: 0;
+  /* bottom: 0;
+  right: 0; */
 }
 .wc-panel {
   position: fixed;
