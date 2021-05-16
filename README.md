@@ -10,15 +10,19 @@ npm i weex-console
 
 # 使用
 
+插件方式安装:
 ```js
 import weexConsole from 'weex-console'
 
-// 插件方式安装
 Vue.use(weexConsole)
 ```
 
 vue文件：
 ```js
+// 模板中
+<weex-console />
+
+
 // 实例方法
 this.$log(xxx)
 ```
