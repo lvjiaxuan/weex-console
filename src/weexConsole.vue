@@ -184,7 +184,7 @@ export default {
 
     addLog(logArr) {
       tabType.log.push(
-        logArr.reduce((acc, item) => {
+        logArr.reduce((acc, item = 'undefined') => {
           const objType = Object.prototype.toString.call(item)
           acc +=
             (['[object Array]', '[object Object]'].includes(objType)
