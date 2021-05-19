@@ -19,10 +19,12 @@ Vue.use(weexConsole)
 
 vue文件：
 ```js
-// 模板中
+// 模板中 应放在模板钟第一层级的最后面
 <weex-console />
 
 
 // 实例方法
 this.$log(xxx)
 ```
+
+长按log消息体可复制。

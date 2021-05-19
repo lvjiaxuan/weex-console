@@ -8,7 +8,7 @@
       @panstart="panstart"
       @panmove="panmove"
     >
-      <text style="color: #fff">wConsole</text>
+      <text style="color: #ffffff">wConsole</text>
     </div>
 
     <div v-if="showPanel" class="wc-panel">
@@ -37,7 +37,7 @@
       </div>
 
       <scroller class="wc-panel-body">
-        <div v-for="(log, index) in tabType[tabName]" :key="log + index" class="wc-panel-body-item">
+        <div v-for="(log, index) in tabType[tabName]" :key="log + index" class="wc-panel-body-item" @longpress="copyLog(log)">
           <text style="font-size: 26px">{{ log }}</text>
         </div>
       </scroller>
@@ -59,6 +59,7 @@
 <script>
 const storage = weex.requireModule('storage')
 const modal = weex.requireModule('modal')
+const clipboard = weex.requireModule('clipboard')
 
 const tabType = {
   // Vue.observable
@@ -261,6 +262,11 @@ export default {
         })
       )
     },
+
+    copyLog(log) {
+      clipboard.setString(log)
+      modal.toast({ message: '已复制' })
+    }
   },
 }
 </script>
@@ -280,7 +286,7 @@ export default {
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: #fff;
+  background-color: #ffffff;
   height: 1000px;
 }
 
@@ -331,6 +337,9 @@ export default {
   border-bottom-width: 2px;
   border-bottom-style: solid;
   border-bottom-color: rgba(0, 0, 0, 0.1);
+}
+.wc-panel-body-item:active {
+  background-color: #f7f7f7;
 }
 
 .wc-footer {
