@@ -4,7 +4,7 @@
   "description": "weex console",
   "main": "dist/index.cjs.js",
   "scripts": {
-    "build": "npx webpack --config webpack.config.js --progress --watch"
+    "watch": "npx webpack --config webpack.config.js --progress --watch"
   },
   "keywords": [
     "weex",
@@ -28,7 +28,7 @@
     "@babel/preset-env": "^7.14.2",
     "babel-core": "^6.26.3",
     "babel-loader": "^8.2.2",
-    "webpack": "^5.37.0",
+    "webpack": "^5.37.1",
     "webpack-cli": "^4.7.0",
     "weex-vue-loader": "^0.7.0"
   },

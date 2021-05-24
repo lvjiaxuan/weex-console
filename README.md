@@ -28,3 +28,8 @@ this.$log(xxx)
 ```
 
 长按log消息体可复制。
+
+# todo
+
+- [] time
+- [] initial pos
