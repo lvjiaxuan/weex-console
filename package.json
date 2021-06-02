@@ -26,7 +26,7 @@
     "*.{vue,js}": "eslint --fix"
   },
   "files": [
-    "index.cjs.js"
+    "dist/index.cjs.js"
   ],
   "name": "weex-console",
   "scripts": {
@@ -36,6 +36,11 @@
     "@babel/core": "7.14.3",
     "@babel/plugin-transform-runtime": "7.14.3",
     "@babel/preset-env": "7.14.4",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.2.2",
+    "webpack": "^5.37.1",
+    "webpack-cli": "^4.7.0",
+    "weex-vue-loader": "^0.7.0",
     "eslint": "7.27.0",
     "lint-staged": "11.0.0",
     "prettier": "2.3.0",
