@@ -1,6 +1,0 @@
-src
-webpack.config.js
-babel.config.js
-.gitignore
-.package-lock.json
-node_modules

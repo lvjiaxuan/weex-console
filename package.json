@@ -1,17 +1,18 @@
 {
-  "name": "weex-console",
   "version": "1.1.0",
   "description": "weex console",
-  "main": "dist/index.cjs.js",
-  "scripts": {
-    "watch": "npx webpack --config webpack.config.js --progress --watch"
-  },
+  "private": false,
   "keywords": [
     "weex",
     "console",
     "log",
     "debug"
   ],
+  "main": "dist/index.cjs.js",
+  "browserslist": "last 2 versions, > 1%, not dead",
+  "author": "lvjiaxuan",
+  "email": "",
+  "homepage": "https://github.com",
   "repository": {
     "type": "git",
     "url": "https://github.com/lvjiaxuan/weex-console.git"
@@ -19,20 +20,28 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
-  "browserslist": "last 2 versions, > 1%, not dead",
-  "author": "lvjiaxuan",
   "license": "ISC",
+  "lint-staged": {
+    "*": "prettier -w -u",
+    "*.{vue,js}": "eslint --fix"
+  },
+  "files": [
+    "index.cjs.js"
+  ],
+  "name": "weex-console",
+  "scripts": {
+    "watch": "npx webpack --config webpack.config.js --progress --watch"
+  },
   "devDependencies": {
-    "@babel/core": "^7.14.3",
-    "@babel/plugin-transform-runtime": "^7.14.3",
-    "@babel/preset-env": "^7.14.2",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^8.2.2",
-    "webpack": "^5.37.1",
-    "webpack-cli": "^4.7.0",
-    "weex-vue-loader": "^0.7.0"
+    "@babel/core": "7.14.3",
+    "@babel/plugin-transform-runtime": "7.14.3",
+    "@babel/preset-env": "7.14.4",
+    "eslint": "7.27.0",
+    "lint-staged": "11.0.0",
+    "prettier": "2.3.0",
+    "husky": "6.0.0"
   },
   "dependencies": {
-    "@babel/runtime-corejs3": "^7.14.0"
+    "@babel/runtime-corejs3": "7.14.0"
   }
 }
