@@ -13,10 +13,7 @@
 
     <div v-if="showPanel" class="wc-panel">
       <div class="wc-panel-tabs">
-        <div
-          :class="['wc-panel-tab-item', tabName === 'log' && 'wc-panel-tab-item-active']"
-          @click="tabName = 'log'"
-        >
+        <div :class="['wc-panel-tab-item', tabName === 'log' && 'wc-panel-tab-item-active']" @click="tabName = 'log'">
           <text>log</text>
         </div>
         <div
@@ -37,17 +34,18 @@
       </div>
 
       <scroller class="wc-panel-body">
-        <div v-for="(log, index) in tabType[tabName]" :key="log + index" class="wc-panel-body-item" @longpress="copyLog(log)">
+        <div
+          v-for="(log, index) in tabType[tabName]"
+          :key="log + index"
+          class="wc-panel-body-item"
+          @longpress="copyLog(log)"
+        >
           <text style="font-size: 26px">{{ log }}</text>
         </div>
       </scroller>
 
       <div class="wc-footer">
-        <div
-          v-if="['log', 'storage'].includes(tabName)"
-          class="wc-footer-item"
-          @click="handleClear"
-        >
+        <div v-if="['log', 'storage'].includes(tabName)" class="wc-footer-item" @click="handleClear">
           <text>Clear-{{ tabName }}</text>
         </div>
         <div class="wc-footer-item" @click="showPanel = false"><text>Hide</text></div>
@@ -70,6 +68,11 @@ const tabType = {
 
 export default {
   name: 'weex-console',
+
+  props: {
+    initialTop: [String, Number],
+    initialLeft: [String, Number],
+  },
 
   data() {
     return {
@@ -134,8 +137,8 @@ export default {
             this.consoleHeight = height
             this.maxTop = WXEnvironment.deviceHeight - height
             this.maxLeft = 750 - width
-            this.top = this.maxTop - 15
-            this.left = this.maxLeft - 15
+            this.top = typeof this.initialTop === 'undefined' ? 150 : +this.initialTop
+            this.left = typeof this.initialLeft === 'undefined' ? 150 : +this.initialLeft
             resolve({ width, height })
           })
         main()
@@ -248,9 +251,7 @@ export default {
             removeItemPromies.push(
               new Promise((resolveB, rejectB) =>
                 storage.removeItem(key, event => {
-                  event.result !== 'success'
-                    ? rejectB(`storage.removeItem('${key}') error`)
-                    : resolveB()
+                  event.result !== 'success' ? rejectB(`storage.removeItem('${key}') error`) : resolveB()
                 })
               )
             )
@@ -266,7 +267,7 @@ export default {
     copyLog(log) {
       clipboard.setString(log)
       modal.toast({ message: '已复制' })
-    }
+    },
   },
 }
 </script>
