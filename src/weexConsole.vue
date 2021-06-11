@@ -28,7 +28,7 @@
         >
           <text style="font-size: 22px">WXEnvironment</text>
         </div>
-        <div class="wc-panel-tab-item" @click="$bridge.reload">
+        <div v-if="hasBridgeModule" class="wc-panel-tab-item" @click="reload">
           <text>refresh</text>
         </div>
       </div>
@@ -55,6 +55,7 @@
 </template>
 
 <script>
+import { Bridge } from 'dolphin-native-bridge'
 const storage = weex.requireModule('storage')
 const modal = weex.requireModule('modal')
 const clipboard = weex.requireModule('clipboard')
@@ -63,7 +64,7 @@ const tabType = {
   // Vue.observable
   log: [],
   storage: [],
-  WXEnvironment: ['Vue.version：' + Vue.version, WXEnvironment],
+  WXEnvironment: ['Vue.version：' + Vue.version, { ...WXEnvironment }],
 }
 
 export default {
@@ -76,6 +77,7 @@ export default {
 
   data() {
     return {
+      hasBridgeModule: weex.isRegisteredModule('bridgeModule'),
       tabName: 'log',
       top: 0,
       left: 0,
@@ -174,7 +176,13 @@ export default {
           value => {
             value === '确认' &&
               this.removeAllStorages()
-                .then(() => modal.toast({ message: '删除成功' }))
+                .then(() => {
+                  this.getAllStorages().then(res => {
+                    this.tabType.storage.push(Object.keys(res))
+                    this.tabType.storage.push(res)
+                  })
+                  modal.toast({ message: '删除成功' })
+                })
                 .catch(e => modal.toast({ message: e.toString() }))
           }
         )
@@ -267,6 +275,10 @@ export default {
     copyLog(log) {
       clipboard.setString(log)
       modal.toast({ message: '已复制' })
+    },
+
+    reload() {
+      Bridge.reload()
     },
   },
 }

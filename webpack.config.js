@@ -7,7 +7,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index.cjs.js',
     library: {
-      type: 'commonjs',
+      type: 'commonjs2',
     },
   },
   resolve: {

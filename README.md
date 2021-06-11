@@ -29,7 +29,11 @@ this.$log(xxx)
 
 长按log消息体可复制。
 
+# notes
+
+refresh仅适用于美的美居
+
 # todo
 
-- [] time
-- [] initial pos
+- [x] time
+- [x] initial pos
