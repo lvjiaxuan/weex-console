@@ -33,6 +33,10 @@
         </div>
       </div>
 
+      <div v-if="showNote" ref="note" class="note">
+        <text style="font-size: 25px">温馨提示：长按可复制消息（{{ hideNoteCount }}s）</text>
+      </div>
+
       <scroller class="wc-panel-body">
         <div
           v-for="(log, index) in tabType[tabName]"
@@ -40,8 +44,8 @@
           class="wc-panel-body-item"
           @longpress="copyLog(log)"
         >
-          <text v-if="tabName === 'log'" class="time-text">{{ getFormatDate('HH:mm:ss') }}:</text>
-          <text style="font-size: 28px">{{ log }}</text>
+          <text v-if="log.time && tabName === 'log'" class="time-text">{{ log.time }}:</text>
+          <text style="font-size: 28px">{{ log.value || log }}</text>
         </div>
       </scroller>
 
@@ -60,6 +64,7 @@ import { Bridge } from 'dolphin-native-bridge'
 const storage = weex.requireModule('storage')
 const modal = weex.requireModule('modal')
 const clipboard = weex.requireModule('clipboard')
+const animation = weex.requireModule('animation')
 
 const tabType = {
   // Vue.observable
@@ -85,6 +90,8 @@ export default {
       maxTop: 0,
       maxLeft: 0,
       showPanel: false,
+      showNote: true,
+      hideNoteCount: 3,
       tabType,
     }
   },
@@ -107,6 +114,13 @@ export default {
   },
 
   watch: {
+    showPanel(newValue) {
+      if(!this.hasShowPanel && newValue) {
+        this.hideNote()
+        this.hasShowPanel = true
+      }
+    },
+
     tabName(newTab) {
       const act = {
         storage: () => {
@@ -199,12 +213,13 @@ export default {
       tabType.log.push(
         logArr.reduce((acc, item = 'undefined') => {
           const objType = Object.prototype.toString.call(item)
-          acc +=
+          acc.time = this.getFormatDate('HH:mm:ss')
+          acc.value +=
             (['[object Array]', '[object Object]'].includes(objType)
               ? JSON.stringify(item, null, 2)
               : item.toString()) + '  '
           return acc
-        }, '')
+        }, { time: 'time', value: '' })
       )
     },
 
@@ -292,6 +307,27 @@ export default {
         .replace(/mm/, now.getMinutes().toString().padStart(2, 0))
         .replace('ss', now.getSeconds().toString().padStart(2, 0))
     },
+
+    hideNote() {
+      this.hideNoteCountTimer = setInterval(() => {
+        if (--this.hideNoteCount == 0) {
+          clearInterval(this.hideNoteCountTimer)
+          animation.transition(
+            this.$refs.note,
+            {
+              styles: {
+                height: 0,
+              },
+              duration: 1111, //ms
+              timingFunction: 'ease-out',
+              needLayout: true,
+              delay: 1000, //ms
+            },
+            () => (this.showNote = false)
+          )
+        }
+      }, 1000)
+    },
   },
 }
 </script>
@@ -367,7 +403,7 @@ export default {
   background-color: #f7f7f7;
 }
 .time-text {
-  font-size: 22px;
+  font-size: 20px;
   margin-bottom: 2px;
   color: #666;
 }
@@ -398,5 +434,11 @@ export default {
 }
 .wc-footer-item:active {
   background-color: #f7f7f7;
+}
+
+.note {
+  padding: 15px 0;
+  align-items: center;
+  background-color: #e1e8eb;
 }
 </style>
