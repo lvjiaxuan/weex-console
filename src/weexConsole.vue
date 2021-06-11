@@ -14,22 +14,22 @@
     <div v-if="showPanel" class="wc-panel">
       <div class="wc-panel-tabs">
         <div :class="['wc-panel-tab-item', tabName === 'log' && 'wc-panel-tab-item-active']" @click="tabName = 'log'">
-          <text>log</text>
+          <text style="font-size: 35px">log</text>
         </div>
         <div
           :class="['wc-panel-tab-item', tabName === 'storage' && 'wc-panel-tab-item-active']"
           @click="tabName = 'storage'"
         >
-          <text>storage</text>
+          <text style="font-size: 35px">storage</text>
         </div>
         <div
           :class="['wc-panel-tab-item', tabName === 'WXEnvironment' && 'wc-panel-tab-item-active']"
           @click="tabName = 'WXEnvironment'"
         >
-          <text style="font-size: 22px">WXEnvironment</text>
+          <text style="font-size: 24px">WXEnvironment</text>
         </div>
         <div v-if="hasBridgeModule" class="wc-panel-tab-item" @click="reload">
-          <text>refresh</text>
+          <text style="font-size: 35px">refresh</text>
         </div>
       </div>
 
@@ -40,7 +40,8 @@
           class="wc-panel-body-item"
           @longpress="copyLog(log)"
         >
-          <text style="font-size: 26px">{{ log }}</text>
+          <text v-if="tabName === 'log'" class="time-text">{{ getFormatDate('HH:mm:ss') }}:</text>
+          <text style="font-size: 28px">{{ log }}</text>
         </div>
       </scroller>
 
@@ -280,6 +281,17 @@ export default {
     reload() {
       Bridge.reload()
     },
+
+    getFormatDate(format = 'yyyyMMddHHmmss') {
+      const now = new Date()
+      return format
+        .replace('yyyy', now.getFullYear().toString())
+        .replace(/MM/, (now.getMonth() + 1).toString().padStart(2, 0))
+        .replace('dd', now.getDate().toString().padStart(2, 0))
+        .replace('HH', now.getHours().toString().padStart(2, 0))
+        .replace(/mm/, now.getMinutes().toString().padStart(2, 0))
+        .replace('ss', now.getSeconds().toString().padStart(2, 0))
+    },
   },
 }
 </script>
@@ -353,6 +365,11 @@ export default {
 }
 .wc-panel-body-item:active {
   background-color: #f7f7f7;
+}
+.time-text {
+  font-size: 22px;
+  margin-bottom: 2px;
+  color: #666;
 }
 
 .wc-footer {
