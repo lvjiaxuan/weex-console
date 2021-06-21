@@ -25,6 +25,11 @@
     "*": "prettier -w -u",
     "*.{vue,js}": "eslint --fix"
   },
+  "config": {
+    "commitizen": {
+      "path": "./.cz-simple"
+    }
+  },
   "files": [
     "dist/index.cjs.js"
   ],
@@ -33,12 +38,12 @@
     "watch": "npx webpack --config webpack.config.js --progress --watch"
   },
   "devDependencies": {
-    "@babel/core": "^7.14.5",
+    "@babel/core": "^7.14.6",
     "@babel/plugin-transform-runtime": "^7.14.5",
     "@babel/preset-env": "^7.14.5",
     "babel-core": "^6.26.3",
     "babel-loader": "^8.2.2",
-    "eslint": "^7.28.0",
+    "eslint": "^7.29.0",
     "eslint-plugin-vue": "^7.10.0",
     "husky": "^6.0.0",
     "lint-staged": "^11.0.0",
@@ -48,7 +53,7 @@
     "weex-vue-loader": "^0.7.0"
   },
   "dependencies": {
-    "@babel/runtime-corejs3": "^7.14.5",
+    "@babel/runtime-corejs3": "^7.14.6",
     "dolphin-native-bridge": "0.0.13"
   }
 }
