@@ -38,22 +38,22 @@
     "watch": "npx webpack --config webpack.config.js --progress --watch"
   },
   "devDependencies": {
-    "@babel/core": "^7.16.0",
-    "@babel/plugin-transform-runtime": "^7.16.0",
-    "@babel/preset-env": "^7.16.0",
+    "@babel/core": "^7.17.5",
+    "@babel/plugin-transform-runtime": "^7.17.0",
+    "@babel/preset-env": "^7.16.11",
     "babel-core": "^6.26.3",
     "babel-loader": "^8.2.3",
-    "eslint": "^8.1.0",
-    "eslint-plugin-vue": "^8.0.3",
+    "eslint": "^8.9.0",
+    "eslint-plugin-vue": "^8.4.1",
     "husky": "^7.0.4",
-    "lint-staged": "^11.2.6",
-    "prettier": "^2.4.1",
-    "webpack": "^5.61.0",
-    "webpack-cli": "^4.9.1",
+    "lint-staged": "^12.3.4",
+    "prettier": "^2.5.1",
+    "webpack": "^5.69.1",
+    "webpack-cli": "^4.9.2",
     "weex-vue-loader": "^0.7.0"
   },
   "dependencies": {
-    "@babel/runtime-corejs3": "^7.16.0",
-    "dolphin-native-bridge": "0.1.8"
+    "@babel/runtime-corejs3": "^7.17.2",
+    "dolphin-native-bridge": "0.1.14"
   }
 }
